@@ -2,6 +2,10 @@ import DialogItem from "./DialogItem/DialogItem";
 import s from "./Dialogs.module.css";
 import Message from "./Message/Message";
 import React from "react";
+import {
+  addMessageActionCreator,
+  updateNewMessageTextActionCreator,
+} from "../../redux/state";
 
 // function selectLinks() {
 //   function select(sel) {
@@ -24,12 +28,12 @@ const Dialogs = (props) => {
 
   let addMessage = () => {
     //добавляет новое сообщение
-    props.dispatch({ type: "ADD-MESSAGE" });
+    props.dispatch(addMessageActionCreator());
   };
 
   let onPostChange = () => {
     let text = messageText.current.value; //получает значение из textarea
-    props.dispatch({ type: "UPDATE-NEW-MESSAGE-TEXT", newText: text });
+    props.dispatch(updateNewMessageTextActionCreator(text));
   };
 
   return (
