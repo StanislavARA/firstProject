@@ -1,0 +1,24 @@
+ul li {
+  list-style-type: georgian;
+  
+}
+.app-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+height: 100vh;
+}
+.app-wrapper-content {
+    flex-grow: 1;
+    background-color: rgb(247, 242, 235);
+    height: 93%;
+    display: flex;
+    /* justify-content: space-between; */
+    /* border: 1px solid red; */
+             
+}
+.app-wrapper-content img {
+  height: 150px;
+  width: 100%; 
+   }
+

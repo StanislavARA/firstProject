@@ -1,0 +1,27 @@
+textarea{
+  resize: none;
+  height: 50px;
+  width: 200px;
+}
+
+button {
+  border-radius: 5px;
+  border:0.1px solid rgb(114, 113, 113);
+}
+button:hover{
+  background-color: gray;
+  color: aliceblue;
+}
+button:active {
+  background-color: rgb(34, 33, 33);
+  color: aliceblue;
+  border: 0.1px solid rgb(34, 33, 33);
+}
+.postsBlock {
+  padding: 10px;
+  border: 1px solid black;
+}
+.posts {
+  padding-top: 5px;
+}
+

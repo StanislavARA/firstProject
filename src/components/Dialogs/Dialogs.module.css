@@ -1,0 +1,25 @@
+.dialogs{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  
+
+}
+.dialog{
+    text-decoration: none;
+    color: green;
+}
+.dialogsItems{
+   width: 15%;
+   padding: 10px;
+   text-decoration: none;
+ }
+ .dialogsItems .active {
+    text-decoration: none;
+    color: gold;
+ }
+.messages{
+    padding: 10px;
+    background-color: aliceblue;
+    width: 80%;
+}

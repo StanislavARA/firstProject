@@ -1,0 +1,9 @@
+.item{
+  display: flex;
+  }
+.text {
+  font-size: 15px;
+}
+.wrapp {
+  text-align: center;
+}

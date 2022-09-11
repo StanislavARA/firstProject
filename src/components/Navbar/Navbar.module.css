@@ -1,0 +1,18 @@
+.nav {
+  flex-grow: 0.01;
+    background-color: blueviolet;
+    padding: 10px;
+}
+.item {
+  color: white;
+  text-decoration: none;
+}
+
+.activeLink {
+  color: gold;
+  text-decoration: none;
+}
+.friends {
+  margin-top: 100px;
+    
+}
