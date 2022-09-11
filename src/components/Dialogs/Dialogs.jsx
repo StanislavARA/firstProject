@@ -3,9 +3,9 @@ import s from "./Dialogs.module.css";
 import Message from "./Message/Message";
 import React from "react";
 import {
-  addMessageActionCreator,
+  sendMessageActionCreator,
   updateNewMessageTextActionCreator,
-} from "../../redux/state";
+} from "../../redux/dialogs-reducer";
 
 // function selectLinks() {
 //   function select(sel) {
@@ -26,13 +26,13 @@ const Dialogs = (props) => {
 
   let messageText = React.createRef(); //создание рефа
 
-  let addMessage = () => {
+  let sendMessage = () => {
     //добавляет новое сообщение
-    props.dispatch(addMessageActionCreator());
+    props.dispatch(sendMessageActionCreator());
   };
 
-  let onPostChange = () => {
-    let text = messageText.current.value; //получает значение из textarea
+  let onMessageChange = (e) => {
+    let text = e.target.value; //получает значение из textarea
     props.dispatch(updateNewMessageTextActionCreator(text));
   };
 
@@ -42,12 +42,13 @@ const Dialogs = (props) => {
       <div className={s.messages}>
         {messagesElements}
         <textarea
+          placeholder="enter your message"
           ref={messageText} //прикрепление рефа
-          onChange={onPostChange} // слушатель событий ончэнж срабатывает при изменении текста и вызывает функцию onPostChange
+          onChange={onMessageChange} // слушатель событий ончэнж срабатывает при изменении текста и вызывает функцию onPostChange
           value={props.state.newMessageText} // берет значения посимвольно из временного хранения newMessageText
         />
         <div>
-          <button onClick={addMessage}>Send</button>
+          <button onClick={sendMessage}>Send</button>
         </div>
       </div>
     </div>
