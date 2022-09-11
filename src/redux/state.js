@@ -59,49 +59,52 @@ let store = {
 
     },
 
-    addPost() {
-
-        let newPost = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likes: 0,
-            avatar: null,
-        }
-        store._state.profilePage.posts.push(newPost);
-        store._state.profilePage.newPostText = "";
-        this._callSubscriber(this._state);
-    },
-
-    updateNewPostText(newText) {
-        this._state.profilePage.newPostText = newText;
-        this._callSubscriber(this._state);
-    },
-
-    addMessage() {
-        let newMessage = {
-            id: "5",
-            message: this.state.dialogsPage.newMessageText, //создаем объект нового сообщения с текстом из newMessageText  
-        };
-        this.state.dialogsPage.messages.push(newMessage) // пушит в массив месседжей объект нового сообщения
-        this.state.dialogsPage.newMessageText = ""; // обнуляем свойство временного хранения текста
-        this._callSubscriber(this._state);
-    },
-
-    updateNewMessageText(newText) {
-        this.state.dialogsPage.newMessageText = newText; //присваивает текст из textarea свойству newMessageText, для временного хранения
-        this._callSubscriber(this.state);
-    },
-
     subscribe(observer) {
         this._callSubscriber = observer;//патерн
     },
 
     getState() {
         return this._state;
-    }
+    },
 
+    _addMessage() {
+        let newMessage = {
+            id: "5",
+            message: this._state.dialogsPage.newMessageText, //создаем объект нового сообщения с текстом из newMessageText  
+        };
+        this._state.dialogsPage.messages.push(newMessage) // пушит в массив месседжей объект нового сообщения
+        this._state.dialogsPage.newMessageText = ""; // обнуляем свойство временного хранения текста
+        this._callSubscriber(this._state);
+    },
+
+    _updateNewMessageText(newText) {
+        this._state.dialogsPage.newMessageText = newText; //присваивает текст из textarea свойству newMessageText, для временного хранения
+        this._callSubscriber(this._state);
+    },
+
+    dispatch(action) {
+        if (action.type === "ADD-POST") {
+            let newPost = {
+                id: 5,
+                message: this._state.profilePage.newPostText,
+                likes: 0,
+                avatar: null,
+            }
+            this._state.profilePage.posts.push(newPost);
+            this._state.profilePage.newPostText = "";
+            this._callSubscriber(this._state);
+        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
+            this._state.profilePage.newPostText = action.newText;
+            this._callSubscriber(this._state);
+        } else if (action.type === "ADD-MESSAGE") {
+            debugger;
+            this._addMessage();
+        } else if (action.type === "UPDATE-NEW-MESSAGE-TEXT") {
+            this._updateNewMessageText(action.newText)
+        }
+
+    },
 }
-
 
 
 

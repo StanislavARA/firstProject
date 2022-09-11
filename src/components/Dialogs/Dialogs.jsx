@@ -24,12 +24,12 @@ const Dialogs = (props) => {
 
   let addMessage = () => {
     //добавляет новое сообщение
-    props.addMessage();
+    props.dispatch({ type: "ADD-MESSAGE" });
   };
 
   let onPostChange = () => {
     let text = messageText.current.value; //получает значение из textarea
-    props.updateNewMessageText(text);
+    props.dispatch({ type: "UPDATE-NEW-MESSAGE-TEXT", newText: text });
   };
 
   return (
