@@ -1,7 +1,30 @@
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 
-const profileReducer = (state, action) => {
+let initialState = {
+    posts: [
+        {
+            id: 1,
+            message: "hello, I'am Cat",
+            likes: 22,
+            avatar:
+                "https://www.meme-arsenal.com/memes/baa72248e5d44682994a2363bb10e635.jpg",
+        },
+        {
+            id: 2,
+            message: "hello, I'am Dog",
+            likes: 2,
+            avatar:
+                "https://play-lh.googleusercontent.com/6f6MrwfRIEnR-OIKIt_O3VdplItbaMqtqgCNSOxcfVMCKGKsOdBK5XcI6HZpjssnB2Y",
+        },
+    ],
+    newPostText: "it-kamasutra.com",
+
+};
+
+
+const profileReducer = (state = initialState, action) => {
+
     switch (action.type) {
         case ADD_POST:
             let newPost = {

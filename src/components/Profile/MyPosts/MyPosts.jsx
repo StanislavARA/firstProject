@@ -18,7 +18,7 @@ const MyPosts = (props) => {
   };
   let onPostChange = () => {
     let text = newPostElement.current.value;
-    props.dispatch(updateNewPostTextActionCreator(text));
+    props.dispatch(updateNewPostTextActionCreator(text)); //для отрисовки вызываем дипач из store.dispatch и передаем в него action { type: ACTION_1, value_1: значение } (action был создан экшнкриэйтором)
   };
   return (
     <div className={s.postsBlock}>
