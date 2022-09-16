@@ -1,6 +1,6 @@
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
-
+//создаем первоначальный стейт (до начала "события/действия")
 let initialState = {
     posts: [
         {
@@ -23,7 +23,7 @@ let initialState = {
 };
 
 
-const profileReducer = (state = initialState, action) => {
+const profileReducer = (state = initialState, action) => { //описывается логика редьюсера, которая произойдет при событии
 
     switch (action.type) {
         case ADD_POST:
@@ -43,6 +43,7 @@ const profileReducer = (state = initialState, action) => {
     }
 };
 
+// создаем action { type: ACTION_1, value_1: значение } для последующей передачи в диспач
 export const addPostActionCreator = () => ({ type: ADD_POST });
 
 export const updateNewPostTextActionCreator = (text) => {

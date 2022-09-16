@@ -1,10 +1,6 @@
 import Post from "./Post/Post";
 import s from "./MyPosts.module.css";
 import React from "react";
-import {
-  addPostActionCreator,
-  updateNewPostTextActionCreator,
-} from "../../../redux/profile-reducer";
 
 const MyPosts = (props) => {
   let postsElements = props.posts.map((p) => {
@@ -14,11 +10,11 @@ const MyPosts = (props) => {
   let newPostElement = React.createRef();
 
   let addPost = () => {
-    props.dispatch(addPostActionCreator());
+    props.addPost();
   };
   let onPostChange = () => {
     let text = newPostElement.current.value;
-    props.dispatch(updateNewPostTextActionCreator(text)); //для отрисовки вызываем дипач из store.dispatch и передаем в него action { type: ACTION_1, value_1: значение } (action был создан экшнкриэйтором)
+    props.updateNewPostText(text);
   };
   return (
     <div className={s.postsBlock}>

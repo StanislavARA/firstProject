@@ -1,6 +1,6 @@
 const SEND_MESSAGE = "SEND-MESSAGE";
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
-
+//создаем первоначальный стейт (до начала "события/действия")
 let initialState = {
     messages: [
         { id: 1, message: "Hi" },
@@ -17,7 +17,7 @@ let initialState = {
     newMessageText: "",
 };
 
-const dialogsReducer = (state = initialState, action) => {
+const dialogsReducer = (state = initialState, action) => {//описывается логика редьюсера, которая произойдет при событии
 
     switch (action.type) {
         case SEND_MESSAGE:
@@ -35,7 +35,7 @@ const dialogsReducer = (state = initialState, action) => {
             return state;
     }
 }
-
+// создаем action { type: ACTION_1, value_1: значение } для последующей передачи в диспач
 export const sendMessageActionCreator = () => ({ type: SEND_MESSAGE });
 
 export const updateNewMessageTextActionCreator = (text) => {
