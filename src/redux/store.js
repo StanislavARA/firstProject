@@ -71,7 +71,7 @@ let store = {
         return this._state;
     },
 
-    dispatch(action) {
+    dispatch(action) { //обновляет store, вызывает каждый редьюсер и передает ему action { type: ACTION_1, value_1: значение }
 
         this._state.profilePage = profileReducer(this._state.profilePage, action);
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);

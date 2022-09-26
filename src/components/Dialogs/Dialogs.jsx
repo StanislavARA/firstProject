@@ -13,11 +13,11 @@ import React from "react";
 
 const Dialogs = (props) => {
   let dialogsElements = props.dialogsPage.dialogs.map((d) => {
-    return <DialogItem name={d.name} id={d.id} />;
+    return <DialogItem name={d.name} id={d.id} key={d.id} />;
   });
 
   let messagesElements = props.dialogsPage.messages.map((m) => {
-    return <Message message={m.message} />;
+    return <Message message={m.message} key={m.id} />;
   });
 
   let messageText = React.createRef(); //создание рефа
@@ -30,7 +30,7 @@ const Dialogs = (props) => {
     let text = e.target.value; //получает значение из textarea
     props.updateNewMessageText(text);
   };
-  debugger;
+
   return (
     <div className={s.dialogs}>
       <div className={s.dialogsItems}>{dialogsElements}</div>

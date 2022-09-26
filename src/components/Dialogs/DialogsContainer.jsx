@@ -4,6 +4,7 @@ import {
   updateNewMessageTextActionCreator,
 } from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
+import { connect } from "react-redux";
 
 // function selectLinks() {
 //   function select(sel) {
@@ -13,22 +14,25 @@ import Dialogs from "./Dialogs";
 //   return select;
 // }
 
-const DialogsContainer = (props) => {
-  let sendMessage = () => {
-    //добавляет новое сообщение
-    props.store.dispatch(sendMessageActionCreator());
+const mapStateToProps = (state) => {
+  // коннект передаст стейт сам
+  return {
+    dialogsPage: state.dialogsPage,
   };
-
-  let onMessageChange = (text) => {
-    props.store.dispatch(updateNewMessageTextActionCreator(text));
-  };
-
-  return (
-    <Dialogs
-      updateNewMessageText={onMessageChange}
-      sendMessage={sendMessage}
-      dialogsPage={props.store.getState().dialogsPage}
-    />
-  );
 };
+
+const mapDispatchToProps = (dispatch) => {
+  // коннект передаст диспатч сам
+  return {
+    updateNewMessageText: (text) => {
+      dispatch(updateNewMessageTextActionCreator(text));
+    },
+    sendMessage: () => {
+      dispatch(sendMessageActionCreator());
+    },
+  };
+};
+//вызываем коннект 2 раза, во второй передаем нашу презентационную компоненту, в 1 передаем две функции, возвращаеющие объект с необходимыми пропсами для компоненты
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+
 export default DialogsContainer;

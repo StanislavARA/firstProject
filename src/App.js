@@ -4,25 +4,25 @@ import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 import { Route, Routes } from 'react-router-dom';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
+import UsersContainer from './components/Users/UsersContainer';
 
 
 
 const App = function (props) {
 
   return (
-
     <div className="app-wrapper">
       <Header />
-      <Navbar navbar={props.state.navbar} />
+      <Navbar />
       <div className="app-wrapper-content">
         <Routes>
-          <Route path='/profile' element={<Profile
-            store={props.store} />} />
-          <Route path='/dialogs/*' element={<DialogsContainer
-            store={props.store} />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/dialogs/*' element={<DialogsContainer />} />
+          <Route path='/users' element={<UsersContainer />} />
+
           {/* <Route path='/news' element={<Dialogs />} />
-            <Route path='/music' element={<Dialogs />} />
-            <Route path='/settings' element={<Dialogs />} /> */}
+          <Route path='/music' element={<Dialogs />} />
+          <Route path='/settings' element={<Dialogs />} /> */}
         </Routes>
       </div>
     </div>

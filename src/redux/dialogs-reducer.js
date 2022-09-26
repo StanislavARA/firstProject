@@ -18,19 +18,30 @@ let initialState = {
 };
 
 const dialogsReducer = (state = initialState, action) => {//описывается логика редьюсера, которая произойдет при событии
-
     switch (action.type) {
-        case SEND_MESSAGE:
-            let newMessage = {
-                id: "5",
-                message: state.newMessageText, //создаем объект нового сообщения с текстом из newMessageText  
-            };
-            state.messages.push(newMessage) // пушит в массив месседжей объект нового сообщения
-            state.newMessageText = ""; // обнуляем свойство временного хранения текста
-            return state;
-        case UPDATE_NEW_MESSAGE_TEXT:
-            state.newMessageText = action.newText; //присваивает текст из textarea свойству newMessageText, для временного хранения
-            return state;
+
+        case SEND_MESSAGE: {
+            // код ниже аналогичен
+            // let newMessage = {
+            //     id: "5",
+            //     message: state.newMessageText, //создаем объект нового сообщения с текстом из newMessageText  
+            // };
+            // stateCopy.messages.push(newMessage) // пушит в массив месседжей объект нового сообщения
+            // stateCopy.newMessageText = ""; // обнуляем свойство временного хранения текста
+            return {
+                ...state,
+                newMessageText: '',
+                messages: [...state.messages, { id: 6, message: state.newMessageText }]
+            }
+
+        }
+        case UPDATE_NEW_MESSAGE_TEXT: {
+            return {
+                ...state,
+                newMessageText: action.newText
+            }//присваивает текст из textarea свойству newMessageText, для временного хранения
+
+        }
         default:
             return state;
     }
