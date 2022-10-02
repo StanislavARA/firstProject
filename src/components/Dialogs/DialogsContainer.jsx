@@ -6,14 +6,6 @@ import {
 import Dialogs from "./Dialogs";
 import { connect } from "react-redux";
 
-// function selectLinks() {
-//   function select(sel) {
-//     if (sel.isActive) return s.active;
-//     return s.dialog;
-//   }
-//   return select;
-// }
-
 const mapStateToProps = (state) => {
   // коннект передаст стейт сам
   return {

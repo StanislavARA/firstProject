@@ -1,8 +1,9 @@
 .header {
   background-color: aquamarine;
   width: 100%;
-  min-height: 7%;
+  height: 5vh;
 }
 .header img {
 max-width: 80px;
+height: 50px;
 }

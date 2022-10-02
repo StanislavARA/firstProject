@@ -5,16 +5,16 @@ ul li {
 .app-wrapper {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-height: 100vh;
+  min-height: 100vh;
+  align-content: flex-start;
+  
 }
 .app-wrapper-content {
     flex-grow: 1;
     background-color: rgb(247, 242, 235);
-    height: 93%;
+    min-height: 93vh;
     display: flex;
-    /* justify-content: space-between; */
-    /* border: 1px solid red; */
+    
              
 }
 

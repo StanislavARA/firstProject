@@ -14,8 +14,9 @@ root.render(
 
     <BrowserRouter>
         <Provider store={store}>
+            {/* провайде передает стор для использования во вложенных компонентах через коннект  */}
             <App />
-        </Provider>
+        </Provider> /
     </BrowserRouter>
 
 );
