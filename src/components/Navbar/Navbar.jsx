@@ -17,6 +17,11 @@ const Navbar = (props) => {
         </NavLink>
       </div>
       <div>
+        <NavLink to="/users" className={selectLink()}>
+          Users
+        </NavLink>
+      </div>
+      <div>
         <NavLink to="/dialogs/" className={selectLink()}>
           Messages
         </NavLink>
@@ -36,11 +41,7 @@ const Navbar = (props) => {
           Settings
         </NavLink>
       </div>
-      <div>
-        <NavLink to="/users" className={selectLink()}>
-          Users
-        </NavLink>
-      </div>
+
       {/* <div className={s.friends}>
         <Friends friends={store.getState().navbar.friends} />
       </div> */}

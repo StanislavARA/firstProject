@@ -1,5 +1,6 @@
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+const SET_USER_PROFILE = "SET_USER_PROFILE ";
 //создаем первоначальный стейт (до начала "события/действия")
 let initialState = {
     posts: [
@@ -19,6 +20,7 @@ let initialState = {
         },
     ],
     newPostText: "it-kamasutra.com",
+    currentProfile: null,
 
 };
 
@@ -44,6 +46,10 @@ const profileReducer = (state = initialState, action) => { //описывает�
             stateCopy.newPostText = action.newText;
             return stateCopy;
         }
+        case SET_USER_PROFILE: {
+
+            return { ...state, currentProfile: action.profile }
+        }
         default:
             return state;
     }
@@ -51,6 +57,7 @@ const profileReducer = (state = initialState, action) => { //описывает�
 
 // создаем action { type: ACTION_1, value_1: значение } для последующей передачи в диспач
 export const addPostActionCreator = () => ({ type: ADD_POST });
+export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
 
 export const updateNewPostTextActionCreator = (text) => {
     return {

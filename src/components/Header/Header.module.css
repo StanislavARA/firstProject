@@ -3,7 +3,17 @@
   width: 100%;
   height: 5vh;
 }
+
 .header img {
 max-width: 80px;
 height: 50px;
+}
+
+.loginBlock {
+  float: right;
+  padding-right: 5px;
+  }
+
+.loginBlock a {
+  color: black;
 }

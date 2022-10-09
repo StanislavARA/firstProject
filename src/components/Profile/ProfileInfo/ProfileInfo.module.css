@@ -5,3 +5,8 @@
     width: 86vw;
     height: 200px;
 }
+
+.desriptionBlock img{
+    width: 100px;
+    border-radius: 50%;
+}
