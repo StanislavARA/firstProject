@@ -7,7 +7,7 @@ let initialState = {
     email: null,
     login: null,
     isAuth: false,
-    avatar: null,
+    avatar: 2,
 
 };
 
