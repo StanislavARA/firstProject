@@ -1,41 +1,25 @@
-import axios from "axios";
 import React from "react";
 import { connect } from "react-redux";
 import {
   follow,
   setCurrentPage,
-  setTotalUsersCount,
-  setUsers,
-  toggleIsFetching,
   unfollow,
+  getUsers,
 } from "../../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../common/preloader/Preloader";
-import { usersAPI } from "../../api/api";
 
 class UsersContainer extends React.Component {
   constructor(props) {
     super(props);
   }
   componentDidMount() {
-    this.props.toggleIsFetching(true);
-
-    usersAPI
-      .getUsers(this.props.currentPage, this.props.pageSize)
-      .then((data) => {
-        this.props.toggleIsFetching(false);
-        this.props.setUsers(data.items);
-        this.props.setTotalUsersCount(data.totalCount);
-      });
+    this.props.getUsers(this.props.currentPage, this.props.pageSize); //создали thunk, чтобы работу с апи перенести из компоненты в BLL
   }
 
   onPageChanged = (pageNumber) => {
-    this.props.setCurrentPage(pageNumber);
-    this.props.toggleIsFetching(true);
-    usersAPI.getUsers(pageNumber, this.props.pageSize).then((data) => {
-      this.props.toggleIsFetching(false);
-      this.props.setUsers(data.items);
-    });
+    // this.props.setCurrentPage(pageNumber);
+    this.props.getUsers(pageNumber, this.props.pageSize);
   };
 
   render() {
@@ -52,6 +36,7 @@ class UsersContainer extends React.Component {
             users={this.props.users}
             unfollow={this.props.unfollow}
             follow={this.props.follow}
+            followingInProgress={this.props.followingInProgress}
           />
         )}
       </>
@@ -66,6 +51,7 @@ let mapStateToProps = (state) => {
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
     isFetching: state.usersPage.isFetching,
+    followingInProgress: state.usersPage.followingInProgress,
   };
 };
 // let mapDispatchToProps = (dispatch) => {
@@ -95,8 +81,6 @@ export default connect(mapStateToProps, {
   //зарефакторил коннект - заменили мапдиспатчтупропс на объект с экшн креэйторами
   follow,
   unfollow,
-  setUsers,
   setCurrentPage,
-  setTotalUsersCount,
-  toggleIsFetching,
+  getUsers,
 })(UsersContainer);

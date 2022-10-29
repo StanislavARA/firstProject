@@ -16,9 +16,6 @@ export const usersAPI = {
                 `users?page=${currentPage}&count=${pageSize}`).then((response) => { return response.data })
     },
 
-}
-
-export const subscriptionAPI = {
     unfollow(userId) {
         return instance.delete(
             `follow/${userId}`).then(response => response.data)

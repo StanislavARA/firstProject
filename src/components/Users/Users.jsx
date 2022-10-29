@@ -1,8 +1,8 @@
 import React from "react";
 import s from "./Users.module.css";
-import userPhoto from "..//../asseds/img/149071.png";
+import userPhoto from "..//../assets/img/149071.png";
 import { NavLink } from "react-router-dom";
-import { subscriptionAPI } from "../../api/api";
+import { subscriptionAPI, usersAPI } from "../../api/api";
 
 const Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -45,26 +45,18 @@ const Users = (props) => {
             <div>
               {u.followed ? (
                 <button
+                  disabled={props.followingInProgress.some((id) => id === u.id)}
                   onClick={() => {
-                    subscriptionAPI.unfollow(u.id).then((data) => {
-                      if (data.resultCode == 0);
-                      {
-                        props.unfollow(u.id);
-                      }
-                    });
+                    props.unfollow(u.id);
                   }}
                 >
                   unfollow
                 </button>
               ) : (
                 <button
+                  disabled={props.followingInProgress.some((id) => id === u.id)}
                   onClick={() => {
-                    subscriptionAPI.follow(u.id).then((data) => {
-                      if (data.resultCode == 0);
-                      {
-                        props.follow(u.id);
-                      }
-                    });
+                    props.follow(u.id);
                   }}
                 >
                   follow

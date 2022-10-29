@@ -1,6 +1,6 @@
 import Preloader from "../../common/preloader/Preloader";
 import s from "./ProfileInfo.module.css";
-import ava from "..//..//../asseds/img/149071.png";
+import ava from "..//..//../assets/img/149071.png";
 const ProfileInfo = (props) => {
   if (!props.profile) {
     return <Preloader />;
