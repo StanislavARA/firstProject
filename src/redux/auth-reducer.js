@@ -1,4 +1,6 @@
+import axios from "axios";
 import { authAPI } from "../api/api";
+
 
 const SET_USER_DATA = "SET_USER_DATA";
 const SET_USER_AVATAR = "SET_USER_AVATAR";
@@ -9,7 +11,7 @@ let initialState = {
     email: null,
     login: null,
     isAuth: false,
-    avatar: 2,
+    avatar: null,
 
 };
 
@@ -41,15 +43,26 @@ export const setUserData = (userId, email, login) => ({ type: SET_USER_DATA, dat
 
 export const setUserAva = (avatar) => ({ type: SET_USER_AVATAR, avatar });
 
-export const authUser = (func) => {
+export const getAuthUser = () => {
     return (dispatch) => {
         authAPI.getDataLoginUser().then((data) => {
             if (data.resultCode === 0) {
                 let { id, email, login } = data.data;
-                func(id);
                 dispatch(setUserData(id, email, login));
+                axios
+                    .get(
+                        `https://social-network.samuraijs.com/api/1.0/profile/${id}`,
+                        {
+                            withCredentials: true,
+                        }
+                    )
+                    .then((response) => {
+                        let ava = response.data.photos.small;
+                        dispatch(setUserAva(ava));
+                    });
             }
-        });
+
+        })
 
     }
 }

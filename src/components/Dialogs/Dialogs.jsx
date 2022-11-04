@@ -2,6 +2,7 @@ import DialogItem from "./DialogItem/DialogItem";
 import s from "./Dialogs.module.css";
 import Message from "./Message/Message";
 import React from "react";
+import { Navigate } from "react-router-dom";
 
 // function selectLinks() {
 //   function select(sel) {
@@ -30,7 +31,7 @@ const Dialogs = (props) => {
     let text = e.target.value; //получает значение из textarea
     props.updateNewMessageText(text);
   };
-
+  if (!props.isAuth) return <Navigate to={"/login"} />; // если не залогинен, перенаправляет на страничку логин
   return (
     <div className={s.dialogs}>
       <div className={s.dialogsItems}>{dialogsElements}</div>
