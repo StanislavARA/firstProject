@@ -5,7 +5,9 @@ import dialogsReducer from "./dialogs-reducer";
 import navbarReducer from "./navbar-reducer";
 import profileReducer from "./profile-reducer";
 import usersReducer from "./users-reducer";
-import thunkMiddleware from "redux-thunk"
+import thunkMiddleware from "redux-thunk";
+import { reducer as formReducer } from 'redux-form';
+import appReducer from "./app-reducer";
 
 // диспач срабатывает на каждый редьюсер, передавая action { type: ACTION_1, value_1: значение }
 let reducers = combineReducers({
@@ -14,6 +16,8 @@ let reducers = combineReducers({
     navbar: navbarReducer,
     usersPage: usersReducer,
     auth: authReducer,
+    form: formReducer,
+    app: appReducer,
 
 });
 

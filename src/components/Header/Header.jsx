@@ -2,7 +2,7 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 import s from "./Header.module.css";
 import React from "react";
-import { setUserAva } from "../../redux/auth-reducer";
+import { setUserAva, logout } from "../../redux/auth-reducer";
 import { connect } from "react-redux";
 import userLogo from "../../assets/img/149071.png";
 
@@ -32,7 +32,11 @@ class Header extends React.Component {
         <img src="https://roundpeg.biz/wp-content/uploads/2013/12/Nike.png" />
         <div className={s.loginBlock}>
           {this.props.isAuth ? (
-            this.props.login
+            <div>
+              {" "}
+              {this.props.login} -{" "}
+              <button onClick={this.props.logout}> Logout</button>{" "}
+            </div>
           ) : (
             <NavLink to={"/login"}>Login</NavLink>
           )}
@@ -51,4 +55,4 @@ const mapStateToProps = (state) => ({
   userId: state.auth.userId,
 });
 
-export default connect(mapStateToProps, { setUserAva })(Header);
+export default connect(mapStateToProps, { setUserAva, logout })(Header);

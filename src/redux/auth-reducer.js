@@ -1,5 +1,7 @@
 import axios from "axios";
+import { stopSubmit } from "redux-form";
 import { authAPI } from "../api/api";
+
 
 
 const SET_USER_DATA = "SET_USER_DATA";
@@ -22,8 +24,7 @@ const authReducer = (state = initialState, action) => { //описывается
         case SET_USER_DATA: {
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.data
             }
         };
         case SET_USER_AVATAR: {
@@ -39,16 +40,16 @@ const authReducer = (state = initialState, action) => { //описывается
 };
 
 // создаем action { type: ACTION_1, value_1: значение } для последующей передачи в диспач
-export const setUserData = (userId, email, login) => ({ type: SET_USER_DATA, data: { userId, email, login } });
+export const setUserData = (userId, email, login, isAuth) => ({ type: SET_USER_DATA, data: { userId, email, login, isAuth } });
 
 export const setUserAva = (avatar) => ({ type: SET_USER_AVATAR, avatar });
 
 export const getAuthUser = () => {
     return (dispatch) => {
-        authAPI.getDataLoginUser().then((data) => {
+        return authAPI.getDataLoginUser().then((data) => { // пишем return, чтобы диспатч вернул нам промис, на который мы подпишемся then в initializeApp
             if (data.resultCode === 0) {
                 let { id, email, login } = data.data;
-                dispatch(setUserData(id, email, login));
+                dispatch(setUserData(id, email, login, true));
                 axios
                     .get(
                         `https://social-network.samuraijs.com/api/1.0/profile/${id}`,
@@ -64,6 +65,35 @@ export const getAuthUser = () => {
 
         })
 
+
+    }
+}
+
+export const login = (email, password, rememberMe) => {
+    return (dispatch) => {
+
+
+        authAPI.login(email, password, rememberMe).then((response) => {
+            if (response.data.resultCode === 0) {
+                console.log(response);
+                dispatch(getAuthUser())
+            }
+            else {
+                let messageError = response.data.messages.length > 0 ? response.data.messages[0] : "Some error";
+                dispatch(stopSubmit("Login", { _error: messageError }));    // при возникновении ошибки вызываем экшн криэйтор stopSubmit - стопаем форму с именем form: "Login", вторым параметром передаем объект с ошибкой диспатчим AC, который потом сам найдет указанную форму и передаст в пропс error  наш messageError
+
+            }
+        })
+    }
+}
+
+export const logout = () => {
+    return (dispatch) => {
+        authAPI.logout().then((response) => {
+            if (response.data.resultCode === 0) {
+                dispatch(setUserData(null, null, null, false))
+            }
+        })
     }
 }
 

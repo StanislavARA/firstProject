@@ -1,5 +1,4 @@
 const SEND_MESSAGE = "SEND-MESSAGE";
-const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 //создаем первоначальный стейт (до начала "события/действия")
 let initialState = {
     messages: [
@@ -13,11 +12,11 @@ let initialState = {
         { id: "2", name: "Sveta" },
         { id: "3", name: "Sasha" },
         { id: "4", name: "Stas" },
-    ],
-    newMessageText: "",
+    ]
 };
 
 const dialogsReducer = (state = initialState, action) => {//описывается логика редьюсера, которая произойдет при событии
+
     switch (action.type) {
 
         case SEND_MESSAGE: {
@@ -30,30 +29,18 @@ const dialogsReducer = (state = initialState, action) => {//описываетс
             // stateCopy.newMessageText = ""; // обнуляем свойство временного хранения текста
             return {
                 ...state,
-                newMessageText: '',
-                messages: [...state.messages, { id: 6, message: state.newMessageText }]
+
+                messages: [...state.messages, { id: 6, message: action.newMessageBody }]
             }
 
         }
-        case UPDATE_NEW_MESSAGE_TEXT: {
-            return {
-                ...state,
-                newMessageText: action.newText
-            }//присваивает текст из textarea свойству newMessageText, для временного хранения
 
-        }
         default:
             return state;
     }
 }
 // создаем action { type: ACTION_1, value_1: значение } для последующей передачи в диспач
-export const sendMessageActionCreator = () => ({ type: SEND_MESSAGE });
+export const sendMessageActionCreator = (newMessageBody) => ({ type: SEND_MESSAGE, newMessageBody });
 
-export const updateNewMessageTextActionCreator = (text) => {
-    return {
-        type: UPDATE_NEW_MESSAGE_TEXT,
-        newText: text,
-    };
-};
 
 export default dialogsReducer;
