@@ -11,7 +11,6 @@ class Header extends React.Component {
     super(props);
   }
   componentDidMount() {
-    // console.log(this.props);
     // axios
     //   .get(
     //     `https://social-network.samuraijs.com/api/1.0/profile/${this.props.userIdd}`,
@@ -26,7 +25,6 @@ class Header extends React.Component {
   }
 
   render() {
-    console.log(this.props.isAuth);
     return (
       <header className={s.header}>
         <img src="https://roundpeg.biz/wp-content/uploads/2013/12/Nike.png" />

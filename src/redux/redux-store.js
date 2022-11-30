@@ -1,5 +1,5 @@
 
-import { applyMiddleware, combineReducers, createStore } from "redux";
+import { applyMiddleware, combineReducers, createStore, compose } from "redux";
 import authReducer from "./auth-reducer";
 import dialogsReducer from "./dialogs-reducer";
 import navbarReducer from "./navbar-reducer";
@@ -21,7 +21,11 @@ let reducers = combineReducers({
 
 });
 
-let store = createStore(reducers, applyMiddleware(thunkMiddleware)); //создает стор с данными, к которым привязывает соответствующий редьюсер. 2 аргументом передали applyMiddleware(thunkMiddleware), чтобы работали thunk 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)));// для работы reduxDevTools в Chrome
+
+// let store = createStore(reducers, 
+//     applyMiddleware(thunkMiddleware)); //создает стор с данными, к которым привязывает соответствующий редьюсер. 2 аргументом передали applyMiddleware(thunkMiddleware), чтобы работали thunk 
 
 
 

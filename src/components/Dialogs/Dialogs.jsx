@@ -29,7 +29,6 @@ const Dialogs = (props) => {
   });
 
   let sendMessage = (values) => {
-    debugger;
     props.sendMessage(values.newMessageBody);
   };
 

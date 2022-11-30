@@ -27,7 +27,6 @@ const LoginPage = (props) => {
 
 const LoginForm = (props) => {
   // п.2 компонента должна получить в пропсы onSubmit = ф-ия, которая прокинется в props.handleSubmit
-  console.log(props);
   return (
     <form onSubmit={props.handleSubmit}>
       <div>

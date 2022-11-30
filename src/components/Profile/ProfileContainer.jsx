@@ -5,12 +5,13 @@ import {
   getUserProfile,
   getStatus,
   updateStatus,
+  savePhoto,
 } from "../../redux/profile-reducer";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { withAuthRedirectComponent } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
+import { withRouter } from "../../hoc/withRouter";
 class ProfileContainer extends React.Component {
-  componentDidMount() {
+  refreshProfile() {
     let userId = this.props.router.params.userId;
     if (!userId) {
       userId = this.props.authorizedUserId;
@@ -20,6 +21,16 @@ class ProfileContainer extends React.Component {
     this.props.getStatus(userId);
   }
 
+  componentDidMount() {
+    this.refreshProfile();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.router.params.userId != this.props.router.params.userId) {
+      this.refreshProfile();
+    }
+  }
+
   render() {
     return (
       <Profile
@@ -27,6 +38,8 @@ class ProfileContainer extends React.Component {
         profile={this.props.profile}
         status={this.props.status}
         updateStatus={this.props.updateStatus}
+        isOwner={!this.props.router.params.userId}
+        savePhoto={this.props.savePhoto}
       />
     );
   }
@@ -39,25 +52,19 @@ let mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth,
 });
 
-function withRouter(Component) {
-  function ComponentWithRouterProp(props) {
-    let location = useLocation();
-    let navigate = useNavigate();
-    let params = useParams();
-    return <Component {...props} router={{ location, navigate, params }} />;
-  }
-
-  return ComponentWithRouterProp;
-}
-
 export default compose(
-  connect(mapStateToProps, { getUserProfile, getStatus, updateStatus }),
+  connect(mapStateToProps, {
+    getUserProfile,
+    getStatus,
+    updateStatus,
+    savePhoto,
+  }),
   withRouter
   // withAuthRedirectComponent
 )(ProfileContainer);
 //компос работает в следующем порядке:
 // let AuthRedirectComponent = withAuthRedirectComponent(ProfileContainer); // передаем в хок  профайл контейнер, чтобы добавить "авторизацию"
-// let ProfileContainerWithRouter = withRouter(AuthRedirectComponent);
+// let ProfileContainerWithAuthRedirectAndWithRouter = withRouter(AuthRedirectComponent);
 // connect(mapStateToProps, { getUserProfile })(
-//   ProfileContainerWithRouter
+//   ProfileContainerWithAuthRedirectAndWithRouter
 // );
